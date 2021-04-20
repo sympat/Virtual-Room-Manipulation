@@ -141,13 +141,8 @@ public class Manipulation : MonoBehaviour
         }
     }
 
-    public void SwitchEnable() {
+    public void SwitchEnable(Room notUsed = null) {
         this.enabled = !this.enabled;
-
-        // if (this.enabled)
-        //     coinTask.SetTaskStart();
-        // else
-        //     coinTask.SetTaskEnd();
     }
 
     private void Awake() {

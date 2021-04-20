@@ -25,8 +25,10 @@ public class VirtualEnvironment : Transform2D
         }
         set {
             if(currentRoom == value) return;
-            if(currentRoom != null) currentRoom.gameObject.tag = "Untagged";
-
+            if(currentRoom != null) {
+                currentRoom.gameObject.tag = "Untagged";
+                GetDoor(currentRoom, value).CloseDoor();
+            }
             currentRoom = value;
             currentRoom.gameObject.tag = "CurrentRoom";
             
@@ -67,7 +69,7 @@ public class VirtualEnvironment : Transform2D
 
         // userBody.Initializing();
         // AddUser(startUser);
-        
+        userBody.AddEnterNewRoomEvent(ChangeCurrentRoom);
 
         CurrentRoom = startRoom;
 
@@ -244,11 +246,14 @@ public class VirtualEnvironment : Transform2D
         return GetRoom(v.ID);
     }
 
-    // public Door GetDoor(Room v, Room u) {
-    //     foreach(var door in adjList[v]) {
-    //         door.GetConnectedRoom
-    //     }
-    // }
+    public Door GetDoor(Room v, Room u) {
+        foreach(var door in adjList[v]) {
+            if(door.GetConnectedRoom(v) == u)
+                return door;
+        }
+
+        return null;
+    }
 
     private void ChangeCurrentRoom(Room targetRoom) {
         CurrentRoom = targetRoom;

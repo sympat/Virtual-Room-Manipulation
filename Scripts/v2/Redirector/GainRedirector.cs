@@ -41,11 +41,11 @@ public class GainRedirector : MonoBehaviour
             degree = user.DeltaPosition.magnitude * (MAX_TRANSLATION_GAIN);
             type = GainType.Translation;
         }
-        // else if (Mathf.Abs(user.DeltaRotation) > 0.1f && user.DeltaPosition.magnitude < Mathf.Abs(user.DeltaRotation))
-        // {
-        //     degree = user.DeltaRotation * (MIN_ROTATION_GAIN);
-        //     type = GainType.Rotation;
-        // }
+        else if (Mathf.Abs(user.DeltaRotation) > 0.1f && user.DeltaPosition.magnitude < Mathf.Abs(user.DeltaRotation))
+        {
+            degree = user.DeltaRotation * (MIN_ROTATION_GAIN);
+            type = GainType.Rotation;
+        }
         else
         {
             type = GainType.Undefined;
@@ -65,9 +65,9 @@ public class GainRedirector : MonoBehaviour
         GainType gainType = result.Item1;
         float degree = result.Item2;
 
-        Debug.Log("gainType: " + gainType);
-        Debug.Log("degree " + degree);
-        Debug.Log("user.DeltaPosition " + user.DeltaPosition);
+        // Debug.Log("gainType: " + gainType);
+        // Debug.Log("degree " + degree);
+        // Debug.Log("user.DeltaPosition " + user.DeltaPosition);
 
 
         switch (gainType)
@@ -76,7 +76,7 @@ public class GainRedirector : MonoBehaviour
                 virtualEnvironment.Translate(-user.Forward * degree * Time.fixedDeltaTime, Space.World);
                 break;
             case GainType.Rotation:
-                virtualEnvironment.Rotate(degree * Time.fixedDeltaTime);
+                virtualEnvironment.RotateAround(user.Position, degree * Time.fixedDeltaTime);
                 break;
             case GainType.Curvature:
                 // this.Translate(-user.Forward * user.DeltaPosition.magnitude * Time.fixedDeltaTime, Space.World);

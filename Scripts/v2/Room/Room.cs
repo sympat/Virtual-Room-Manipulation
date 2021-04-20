@@ -21,12 +21,14 @@ public class Room : Bound2D
         originSize = this.Size; 
 
         this.gameObject.layer = LayerMask.NameToLayer("Room");
+
+        transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, Height, transform.GetChild(0).position.z); // 전등
+        if(transform.childCount > 1) transform.GetChild(1).localScale = Vector3.Scale(transform.GetChild(1).localScale, originScale); // Teleport
+
     }
 
     protected override void UpdateBox(Vector2 size, float height) {
         base.UpdateBox(size, height);
-
-        transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, height, transform.GetChild(0).position.z); // 전등
 
         // update mesh
         UpdateMesh();
@@ -121,9 +123,19 @@ public class Room : Bound2D
             }
         }
 
+        Vector2[] uvs = new Vector2[] {
+            Vector2.zero, Vector2.up, Vector2.one, Vector2.right,
+            Vector2.zero, Vector2.up, Vector2.one, Vector2.right,
+            Vector2.zero, Vector2.up, Vector2.one, Vector2.right,
+            Vector2.zero, Vector2.up, Vector2.one, Vector2.right,
+            Vector2.right, Vector2.zero, Vector2.up, Vector2.one,
+            Vector2.zero, Vector2.right, Vector2.one, Vector2.up,
+        };
+
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.normals = normals;
+        mesh.uv = uvs;
 
         GetComponent<MeshFilter>().mesh = mesh;
         

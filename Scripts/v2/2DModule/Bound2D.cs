@@ -11,6 +11,7 @@ public class Bound2D : Transform2D
     protected static int totalID = 0;
     protected int id;
     protected BoxCollider box;
+    protected Vector3 originScale;
 
     public int ID {
         get {
@@ -98,11 +99,13 @@ public class Bound2D : Transform2D
     protected void ApplySize() {
         if(useScaleAsSize) {
             box.size = Vector3.Scale(box.size, transform.localScale);
+            originScale= transform.localScale;
             transform.localScale = Vector3.one;
             this.Size = CastVector3Dto2D(box.size);
             this.Height = box.size.y;
         }
         else {
+            originScale= transform.localScale;
             transform.localScale = Vector3.one;
             this.Size = initSize;
             this.Height = height;

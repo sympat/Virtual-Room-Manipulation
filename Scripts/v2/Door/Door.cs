@@ -103,14 +103,19 @@ public class Door : Transform2D
         List<GameObject> knob = Utility.GetChildrenWithLayer(doorMain, "Knob");
         knob.ForEach(x => x.GetComponent<MeshCollider>().enabled = false);
 
+        // Debug.Log(new Vector4(box.min.x - box.center.x, box.min.y - box.center.y, box.min.z - box.center.z, 0));
+        // Debug.Log(new Vector4(box.max.x - box.center.x, box.max.y - box.center.y, box.max.z - box.center.z, 0));
+        // Debug.Log(new Vector4(box.min.x - room1.Position.x, box.min.y, box.min.z - room1.Position.y, 0));
+        // Debug.Log(new Vector4(box.max.x - room1.Position.x, box.max.y, box.max.z - room1.Position.y, 0));
+
         if(room1 != null) {
-            room1.GetComponent<MeshRenderer>().material.SetVector("_DoorMin", new Vector4(box.min.x, box.min.y, box.min.z, 0));
-            room1.GetComponent<MeshRenderer>().material.SetVector("_DoorMax", new Vector4(box.max.x, box.max.y, box.max.z, 0));
+            room1.GetComponent<MeshRenderer>().material.SetVector("_DoorMin", new Vector4(box.min.x - room1.Position.x, box.min.y, box.min.z - room1.Position.y, 0));
+            room1.GetComponent<MeshRenderer>().material.SetVector("_DoorMax", new Vector4(box.max.x - room1.Position.x, box.max.y, box.max.z - room1.Position.y, 0));
         }
 
         if(room2 != null) {
-            room2.GetComponent<MeshRenderer>().material.SetVector("_DoorMin", new Vector4(box.min.x, box.min.y, box.min.z, 0));
-            room2.GetComponent<MeshRenderer>().material.SetVector("_DoorMax", new Vector4(box.max.x, box.max.y, box.max.z, 0));
+            room2.GetComponent<MeshRenderer>().material.SetVector("_DoorMin", new Vector4(box.min.x - room2.Position.x, box.min.y, box.min.z - room2.Position.y, 0));
+            room2.GetComponent<MeshRenderer>().material.SetVector("_DoorMax", new Vector4(box.max.x - room2.Position.x, box.max.y, box.max.z - room2.Position.y, 0));
         }
 
         isOpened = true;
@@ -118,6 +123,8 @@ public class Door : Transform2D
 
     public void CloseDoor()
     {
+        Debug.Log("CloseDoor");
+
         GameObject doorMain = Utility.GetChildWithLayer(this.gameObject, "Door Main");
 
         if(isOpened) {

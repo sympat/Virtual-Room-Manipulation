@@ -110,12 +110,16 @@ public class Transform2D : MonoBehaviour {
 
     public void Translate(Vector2 translation, Space relativeTo = Space.Self)
     {
-        transform.Translate(Utility.CastVector2Dto3D(translation), relativeTo);
+        transform.Translate(CastVector2Dto3D(translation), relativeTo);
     }
 
     public void Rotate(float degree, Space relativeTo = Space.Self)
     {
         transform.Rotate(new Vector3(0, -degree, 0), relativeTo);
+    }
+
+    public void RotateAround(Vector2 point, float angle) {
+        transform.RotateAround(CastVector2Dto3D(point), Vector3.up, angle);
     }
 
     public Vector2 TransformPoint(Vector2 localPoint) // this local 좌표계 있는 point를 global 좌표계로 변환

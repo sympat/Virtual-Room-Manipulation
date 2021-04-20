@@ -19,7 +19,7 @@ public class UserBody : Transform2D {
         public Transform target;
         public UserEventArgs(Transform tf) { target = tf; }
     }
-    private static UnityEvent onEnterNewRoom = new UnityEvent();
+    private static RoomEvent onEnterNewRoom = new RoomEvent();
     private static RoomEvent onExitRoom = new RoomEvent();
     private static UnityEvent onEnterTarget = new UnityEvent();
     private static UnityEvent onDetachTurnTarget = new UnityEvent();
@@ -45,7 +45,7 @@ public class UserBody : Transform2D {
         get { return deltaPosition; }
     }
 
-    public void AddEnterNewRoomEvent(UnityAction call) {
+    public void AddEnterNewRoomEvent(UnityAction<Room> call) {
         onEnterNewRoom.AddListener(call);
     }
 
@@ -152,7 +152,7 @@ public class UserBody : Transform2D {
             }
             else if(other.gameObject.tag == "CurrentRoom") {
                 if(isEnterNewRoom) {
-                    onEnterNewRoom.Invoke();
+                    onEnterNewRoom.Invoke(enteredRoom);
                 }
             }
         }
