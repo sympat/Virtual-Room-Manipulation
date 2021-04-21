@@ -77,10 +77,11 @@ public class UserBody : Transform2D {
     private IEnumerator UpdateCurrentState()
     {
         while(true) {
-            deltaPosition = (this.LocalPosition - previousPosition) / Time.fixedDeltaTime;
+            // TODO: VR body 일때 delta 값이 적게 측정되는 경우가 있음
+            deltaPosition = (this.Position - previousPosition) / Time.fixedDeltaTime;
             deltaRotation = Vector2.SignedAngle(previousForward, this.Forward) / Time.fixedDeltaTime;
 
-            previousPosition = this.LocalPosition;
+            previousPosition = this.Position;
             previousForward = this.Forward;
 
             yield return new WaitForFixedUpdate();
@@ -91,7 +92,7 @@ public class UserBody : Transform2D {
     {
         deltaPosition = Vector2.zero;
         deltaRotation = 0;
-        previousPosition = this.LocalPosition;
+        previousPosition = this.Position;
         previousForward = this.Forward;
     }
 
@@ -115,6 +116,9 @@ public class UserBody : Transform2D {
         // onEnterNewRoom.AddListener((other) => {Debug.Log("User entered " + other.name);});
 
         this.gameObject.layer = LayerMask.NameToLayer("Player");
+
+        // ResetCurrentState();
+        // StartCoroutine("UpdateCurrentState");
     }
 
     private void OnEnable() {

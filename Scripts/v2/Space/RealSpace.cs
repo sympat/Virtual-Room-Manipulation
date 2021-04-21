@@ -12,6 +12,8 @@ public class RealSpace : Bound2D
         this.gameObject.layer = LayerMask.NameToLayer("Real Space");
         this.gameObject.tag = "Real Space";
 
+        if(transform.childCount > 0) transform.GetChild(0).localScale = Vector3.Scale(transform.GetChild(0).localScale, originScale); // Teleport
+
     }
 
 }

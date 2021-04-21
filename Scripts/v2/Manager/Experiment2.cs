@@ -14,13 +14,13 @@ public class Experiment2 : Manager
     {
         base.Start();
 
-        UserBody userBody = user.GetTrackedUserBody();
+        // UserBody userBody = user.GetTrackedUserBody();
 
-        userBody.AddClickEvent(userUI.DisableUI, 0);
-        userBody.AddClickEvent(userPointer.HidePointer, 0);
+        // userBody.AddClickEvent(userUI.DisableUI, 0);
+        // userBody.AddClickEvent(userPointer.HidePointer, 0);
 
-        // userPointer.ShowPointer();
-        userUI.PopUpOkParagraph();
+        // // userPointer.ShowPointer();
+        // userUI.PopUpOkParagraph();
     }
 
 }

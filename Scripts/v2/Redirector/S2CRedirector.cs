@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class S2CRedirector : SteerToTargetRedirector
 {
-    public Bound2D realSpace;
     private const float S2C_BEARING_ANGLE_THRESHOLD_IN_DEGREE = 160;
     private const float S2C_TEMP_TARGET_DISTANCE = 4;
 
