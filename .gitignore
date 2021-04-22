@@ -31,9 +31,6 @@ _ReSharper*/
 #Nuget packages folder
 packages/
 
-# Ignore unity meta file
-*.meta
-
 # Ignore unity SteamVR package
 SteamVR/
 SteamVR_Input/

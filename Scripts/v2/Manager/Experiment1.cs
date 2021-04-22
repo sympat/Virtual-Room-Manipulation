@@ -106,7 +106,7 @@ public class Experiment1 : Manager
         userBody.AddClickEvent(userUI.DisableUI, 3);
         userBody.AddClickEvent(userPointer.HidePointer, 3);
 
-        userPointer.ShowPointer();
+        // userPointer.ShowPointer();
         userUI.PopUpOkParagraph();
     }
 
